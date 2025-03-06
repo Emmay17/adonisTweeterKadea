@@ -1,0 +1,61 @@
+
+@import "tailwindcss";
+  
+  html,
+  body {
+    background-color: black;
+    color: white;
+    font-family :'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  }
+
+  img{
+    cursor: pointer;
+  }
+ 
+.menu nav ul li img {
+    width: 24px;
+    width: 24px;
+}
+
+.menu nav ul li p {
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.menu nav ul li{
+cursor: pointer;
+transition: transform 0.2s ease-in-out;
+}
+
+main .menu nav ul li:hover {
+transform: translateX(8px); /* Décale de 8px vers la droite */
+}
+
+button{
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #1D9BFF;
+}
+
+.scroll-custom::-webkit-scrollbar {
+    width: 1px;
+    box-shadow: #1D9BF0;
+  }
+  
+  .scroll-custom::-webkit-scrollbar-thumb {
+    background-color: #1D9BF0; /* Bleu Twitter */
+    border-radius: 10px;
+  }
+  
+  .scroll-custom::-webkit-scrollbar-track {
+    
+  }
+/* main nav ul li :hover{
+    padding-left: 8px;
+} */
+
+/* main{
+    padding: 1rem;
+} */
