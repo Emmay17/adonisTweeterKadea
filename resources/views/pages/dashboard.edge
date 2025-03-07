@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+        Clone X
+    </title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- @stack('dumper') --}}
+    <link href="/resources/css/dashboard.css" rel="stylesheet">
+</head>
+
+<body>
+    <aside class="leftAside w-[20%]">
+        <div class="menuDiv">
+            <img src="/public/tweeter.svg" alt="tweeter" class="icon">
+            <nav>
+                <ul>
+                    <li data-id="Home">
+                        <img src="/public/home.svg" alt="home icon" class="icon">
+                        <p>Home</p>
+                    </li>
+                    <li data-id="Explore">
+                        <img src="/public/hashtag.svg" alt="explore icon" class="icon">
+                        <p>Explore</p>
+                    </li>
+                    <li data-id="Notifications">
+                        <img src="/public/notification.svg" alt="notifications icon" class="icon">
+                        <p>Notifications</p>
+                    </li>
+                    <li data-id="Messages">
+                        <img src="/public/message.svg" alt="messages icon" class="icon">
+                        <p>Messages</p>
+                    </li>
+                    <li data-id="Bookmarks">
+                        <img src="/public/bookmark.svg" alt="bookmarks icon" class="icon">
+                        <p>Bookmarks</p>
+                    </li>
+                    <li data-id="Lists">
+                        <img src="/public/list.svg" alt="lists icon" class="icon">
+                        <p>Lists</p>
+                    </li>
+                    <li data-id="Profile">
+                        <img src="/public/profil.svg" alt="profile icon" class="icon">
+                        <p>Profile</p>
+                    </li>
+                    <li data-id="More">
+                        <img src="/public/more.svg" alt="more icon" class="icon">
+                        <p>More</p>
+                    </li>
+                </ul>
+            </nav>
+            <button>
+                Tweet
+            </button>
+        </div>
+
+        <div class="userDetail">
+            <img src="/public/profile_photo.jpeg" alt="profile_img" class="imgPhoto">
+            <div>
+                <div class="flex flex-row gap-[1px]">
+                    <p>Utilisateur</p>
+                    <img src="/public/cadenas.svg" alt="cadenasIcon" class="icon">
+                </div>
+                <span>@username</span>
+            </div>
+            <img src="/public/More-2.svg" alt="more-2" class="icon">
+        </div>
+    </aside>
+
+    <main class="overflow-auto  border-x-[0.5px] border-gray-500 gap-3 flex flex-col w-[50%] ">
+        <div class="flex flex-row justify-between paddingBottom w-full">
+            <h1 class="font-bold text-[20px]">Home</h1>
+            <img src="/public/Timeline-Prop.svg" alt="AIicon" class="icon">
+        </div>
+
+        <div class="flex flex-row gap-3 paddingBottom ">
+            <img src="/public/profile_photo.jpeg" alt="profile_img" class="imgPhoto">
+            <div class="w-full">
+                <textarea id="autoResize" placeholder="What's happening?" class="w-full"></textarea>
+                <div class="flex flex-row justify-between items-end">
+                    <nav>
+                        <ul class="flex flex-row gap-3">
+                            <li>
+                                <img src="/public/Icons/Media.svg" alt="icon">
+                            </li>
+                            <li>
+                                <img src="/public/Icons/Gif.svg" alt="icon">
+                            </li>
+                            <li>
+                                <img src="/public/Icons/Poll.svg" alt="icon">
+                            </li>
+                            <li>
+                                <img src="/public/Icons/Emoji.svg" alt="icon">
+                            </li>
+                            <li>
+                                <img src="/public/Icons/Schedule.svg" alt="icon">
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <button class="w-[4.9375rem] h-[2.25rem] bg-[var(--bluebutton)] rounded-full">Tweet</button>
+                </div>
+            </div>
+        </div>
+
+        <nav>
+            <ul>
+                <li class="flex flex-row gap-3 paddingBottom">
+                    <div>
+                        <img src="/public/profile_photo.jpeg" alt="icon" class="imgPhoto">
+                    </div>
+        
+                    <div class="flex flex-col w-[80%] flex-grow">
+                        <div class="flex flex-row gap-2">
+                            <p>CNN</p>
+                            <img src="/public/Group.svg" alt="checkIcon">
+                            <span class="text-gray-500">@CNN .</span>
+                            <span class="text-gray-500">7m</span>
+                        </div>
+        
+                        {{-- <div> --}}
+                            <p class="flex-grow w-[var(--postImgSizeWidth)] text-[0.9375rem]">
+                                President Joe Biden touted a new agreement reached with the European Union to ease Trump-era
+                                tariffs on aluminum and steel as a "major breakthrough" that would serve to both strengthen the
+                                US steel industry and combat the global climate crisis.
+                            </p>
+                        {{-- </div> --}}
+        
+                        <nav>
+                            <ul class="flex justify-start flex-start-left gap-x-10">
+                                <li class="flex items-center gap-3">
+                                    <img src="/public/comment.svg" alt="comment icon" class="icon">
+                                    <span>57</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <img src="/public/retweet.svg" alt="comment icon" class="icon">
+                                    <span>144</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <img src="/public/like.svg" alt="comment icon" class="icon">
+                                    <span>184</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <img src="/public/share.svg" alt="comment icon " class="icon">
+                                    <span></span>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </li>
+        
+                <li class="flex flex-row gap-3 paddingBottom">
+                    <div>
+                        <img src="/public/profile_photo.jpeg" alt="icon" class="imgPhoto">
+                    </div>
+        
+                    <div class="flex flex-col gap-3 w-[80%] flex-grow">
+                        <div class="flex gap-2">
+                            <p>The New York Times</p>
+                            <img src="/public/Group.svg" alt="checkIcon" >
+                            <span class="text-gray-500">@nytimes .</span>
+                            <span class="text-gray-500">2h</span>
+                        </div>
+        
+                        <div>
+                            <p class="flex-grow w-[var(--postImgSizeWidth)]">
+                                Gardening boomed during the pandemic. Six Black writers share how it has helped them
+                                re-establish, and reimagine, a connection to cultivation and the land
+                            </p>
+                        </div>
+        
+                        <img src="/public/profile_photo.jpeg" alt="image" class="imgPost">
+        
+                        <nav>
+                            <ul class="flex gap-10">
+                                <li class="flex gap-3">
+                                    <img src="/public/comment.svg" alt="comment icon" class="icon">
+                                    <span>57</span>
+                                </li>
+                                <li class="flex gap-3">
+                                    <img src="/public/retweet.svg" alt="comment icon" class="icon">
+                                    <span>144</span>
+                                </li>
+                                <li class="flex gap-3">
+                                    <img src="/public/like.svg" alt="comment icon" class="icon">
+                                    <span>184</span>
+                                </li>
+                                <li class="flex gap-3">
+                                    <img src="/public/share.svg" alt="comment icon " class="icon">
+                                    <span></span>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </li>
+        
+                <li class="flex flex-row gap-3 paddingBottom">
+                    <div>
+                        <img src="/public/profile_photo.jpeg" alt="icon" class="imgPhoto">
+                    </div>
+        
+                    <div class="flex flex-col w-[80%] flex-grow gap-3">
+                        <div class="flex flex-row gap-3">
+                            <p>The New York Times</p>
+                            <img src="/public/Group.svg" alt="checkIcon">
+                            <span class="text-gray-500">@nytimes .</span>
+                            <span class="text-gray-500">2h</span>
+                        </div>
+        
+                        <div>
+                            <p class="flex-grow w-[var(--postImgSizeWidth)]">
+                                Gardening boomed during the pandemic. Six Black writers share how it has helped them
+                                re-establish, and reimagine, a connection to cultivation and the land
+                            </p>
+                        </div>
+        
+                        <nav>
+                            <ul class="flex gap-10">
+                                <li class="flex gap-5 items-center">
+                                    <img src="/public/comment.svg" alt="comment icon" class="icon">
+                                    <span>57</span>
+                                </li>
+                                <li class="flex gap-5 items-center">
+                                    <img src="/public/retweet.svg" alt="comment icon" class="icon">
+                                    <span>144</span>
+                                </li>
+                                <li class="flex gap-5 items-center">
+                                    <img src="/public/like.svg" alt="comment icon" class="icon">
+                                    <span>184</span>
+                                </li>
+                                <li class="flex gap-5 items-center">
+                                    <img src="/public/share.svg" alt="comment icon" class="icon">
+                                    <span></span>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        
+    </main>
+
+    <aside class="flex flex-col p-4 overflow-x-auto gap-5 w-[30%]">
+        <div class="bg-gray-800 flex rounded-full p-2 gap-3">
+            <img src="/public/search.svg" alt="loopIcon">
+            <input placeholder="Search Twitter" class="w-full">
+        </div>
+
+        <div class="bg-gray-800 flex flex-col rounded-[1rem] gap-1 p-3  min-h-[20rem]">
+            <div class="flex justify-between items-center">
+                <p class="font-bold text-lg">Trends for you</p>
+                <img src="/public/Settings.svg" alt="settings icon" class="icon">
+            </div>
+
+            <div class="flex flex-col gap-1 overflow-x-auto">
+                <nav>
+                    <ul class="flex flex-col gap-3">
+                        <li>
+                            <div class="flex justify-between items-center">
+                                <p class="text-[var(--grayTextColor)] text-xs">Trending in Turkey</p>
+                                <img src="/public/More-2.svg" class="w-[1.125rem] h-[1.125rem]">
+                            </div>
+                            <p>#SQUID</p>
+                            <p class="text-[var(--grayTextColor)] text-xs">
+                                <span>2,066</span>
+                                Tweets
+                            </p>
+                        </li>
+
+                        <li>
+                            <div class="flex justify-between items-center">
+                                <p class="text-[var(--grayTextColor)] text-xs">Trending in Turkey</p>
+                                <img src="/public/More-2.svg" class="w-[1.125rem] h-[1.125rem]">
+                            </div>
+                            <p>#SQUID</p>
+                            <p class="text-[var(--grayTextColor)] text-xs">
+                                <span>2,066</span>
+                                Tweets
+                            </p>
+                        </li>
+
+                        <li>
+                            <div class="flex justify-between items-center">
+                                <p class="text-[var(--grayTextColor)] text-xs">Trending in Turkey</p>
+                                <img src="/public/More-2.svg" class="w-[1.125rem] h-[1.125rem]">
+                            </div>
+                            <p>#SQUID</p>
+                            <p class="text-[var(--grayTextColor)] text-xs">
+                                <span>2,066</span>
+                                Tweets
+                            </p>
+                        </li>
+
+                        <li>
+                            <div class="flex justify-between items-center">
+                                <p class="text-[var(--grayTextColor)] text-xs">Trending in Turkey</p>
+                                <img src="/public/More-2.svg" class="w-[1.125rem] h-[1.125rem]">
+                            </div>
+                            <p>#SQUID</p>
+                            <p class="text-[var(--grayTextColor)] text-xs">
+                                <span>2,066</span>
+                                Tweets
+                            </p>
+                        </li>
+                    </ul>
+                </nav>
+                <p class="text-[var(--bluebutton)]">Show more</p>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-3 bg-gray-800 rounded-[1rem] p-3">
+            <p class="text-lg font-bold">
+                Who to follow
+            </p>
+
+            <nav>
+                <ul class="flex flex-col gap-3">
+                    <li class="flex justify-between items-center gap-3">
+                        <img src="/public/profile_photo.jpeg" class="imgPhoto">
+                        <div class="flex flex-col ">
+                            <div class="flex flex-row gap-1">
+                                <p>The New York Times</p>
+                                <img src="/public/Group.svg">
+                            </div>
+                            <p class="text-gray-500">@nytimes</p>
+                        </div>
+                        <button class="bg-white text-black w-[4.5625rem] h-[1.9375rem] rounded-full">
+                            Follow
+                        </button>
+                    </li>
+
+                    <li class="flex justify-between items-center gap-3">
+                        <img src="/public/profile_photo.jpeg" class="imgPhoto">
+                        <div class="flex flex-col ">
+                            <div class="flex flex-row gap-1">
+                                <p>The New York Times</p>
+                                <img src="/public/Group.svg">
+                            </div>
+                            <p class="text-gray-500">@nytimes</p>
+                        </div>
+                        <button class="bg-white text-black w-[4.5625rem] h-[1.9375rem] rounded-full">
+                            Follow
+                        </button>
+                    </li>
+
+                    <li class="flex justify-between items-center gap-3">
+                        <img src="/public/profile_photo.jpeg" class="imgPhoto">
+                        <div class="flex flex-col ">
+                            <div class="flex flex-row gap-1">
+                                <p>The New York Times</p>
+                                <img src="/public/Group.svg">
+                            </div>
+                            <p class="text-gray-500">@nytimes</p>
+                        </div>
+                        <button class="bg-white text-black w-[4.5625rem] h-[1.9375rem] rounded-full">
+                            Follow
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+
+            <p class="text-[var(--bluebutton)]">Show more</p>
+        </div>
+    </aside>
+
+    <script src="/resources/js/dashboard.js"></script>
+</body>
+</html>
