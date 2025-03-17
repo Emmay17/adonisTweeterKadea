@@ -1,38 +1,54 @@
-// import type { HttpContext } from '@adonisjs/core/http'
 import type { HttpContext } from '@adonisjs/core/http'
-// import View from '@ioc:Adonis/Core/View'
+import {posts, Users} from "../../public/data.js"
+
+interface User {
+    id: number;
+    name: string;
+    email: string;
+    avatar: string;
+}
+interface Post {
+    id_user: number;
+    id_post: number;
+    content: string;
+    comment: number;
+    partage: number;
+    likes: number;
+    image: string;
+}
+
 
 export default class PostsController {
-    private posts = [
-        {
-            id: 1,
-            username: 'Emmanuel mayele',
-            userArobase: "@MayeleEmmanuel",
-            content: `President Joe Biden touted a new agreement reached with the European Union to ease Trump-era
-                        tariffs on aluminum and steel as a "major breakthrough" that would serve to both strengthen the
-                        US steel industry and combat the global climate crisis.`,
-            comment: 12,
-            partage: 24,
-            likes: 12000,
-            image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-        },
-
-        {
-            id: 2,
-            username: 'Gad Ntenta',
-            userArobase: "@NtentaGad",
-            content: `La belle vie de kinshasa en une image`,
-            comment: 12,
-            partage: 24,
-            likes: 12000,
-            image: '/public/profile_photo.jpeg',
-        },
-
-        
-    ]
-
+    // Méthode pour récupérer les posts et les afficher
     public async getPosts({ view }: HttpContext) {
-        return view.render('pages/dashboard', { posts: this.posts })
+        const postes = posts.map((post: any) => {
+            const user = Users.find((u: any) => u.id === post.id_user)
+            return { ...post,user}
+        })
+        return view.render('pages/dashboard', { postes , user: Users[0]})
     }
 
+    public async savePost({request,response}:HttpContext){
+        const data = request.all() as Partial<Post>;
+
+        if (!data.id_user || !data.content) {
+            return response.status(400).json({ error: "Données manquantes" })
+        };
+
+        console.log("Données envoyées :", data);
+
+        const newPost: Post = {
+            id_user : data.id_user,
+            id_post : data.id_post ?? (posts.length + 1),
+            content : data.content,
+            comment : 0,
+            partage : 0,
+            likes : 0,
+            image : data.image ?? ""
+        };
+
+        posts.unshift(newPost);
+
+        return response.redirect().toRoute('/dashboard')
+    }
 }
