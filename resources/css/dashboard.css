@@ -8,6 +8,8 @@
     font-family :'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display : flex;
     box-sizing: border-box;
+    width: 100%;
+    justify-content: space-between;
   }
 
   :root{
@@ -17,7 +19,7 @@
     --grayTextColor : #6E767D;
     --postImgSizeWidth: 31.625rem;
     --postImgSizeHeight: 17.71875rem;
-    --postImgBorderSize: 2.25rem;
+    --postImgBorderSize: 1rem;
     --leftAsideGrayText: 0.8125rem;
   }
 
@@ -44,6 +46,7 @@ textarea{
     display: flex;
     flex-direction: column;
     justify-content: space-between  ;
+    width: 20%;
   }
 
   .leftAside .menuDiv{
@@ -65,29 +68,31 @@ textarea{
   .leftAside ul{
     display: flex;
     flex-direction: column;
-    gap: 1rem;
   }
 
   .leftAside li{
     display: flex;
+    flex: 1;
     gap: 1rem;
+    width: fit-content;
     align-items: center;
     cursor: pointer;
-    transition: ease-in-out 200ms;
+    padding: 10px 0.7rem;
+    border-radius: 50px;
+    transition: ease-in-out 10ms;
   }
 
   .leftAside li:hover{
-    padding-left: 1rem;
-    transform: 200ms ease-in-out;
+    background :#1a202c ;
+    transform: 10ms ease-in-out;
   }
 
   .leftAside li p{
     font-size: 1.1875rem;
-    font-weight:700;
   }
 
   .leftAside button {
-    width: 14.0625rem;
+    width: auto;
     height: 3.25rem;
     color: white;
     background: var(--bluebutton);
@@ -146,3 +151,44 @@ textarea{
   background: var(--bluebutton);
   border-radius: 10px;
 }
+
+.profileSection{
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: none;
+}
+
+.profileSection.active{
+  opacity: 1;
+  transform: translateY(0);
+  display: flex;
+  flex-direction: column;
+}
+.content-section {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: none;
+}
+.content-section.active {
+  opacity: 1;
+  transform: translateY(0);
+  display: flex;
+  flex-direction: column;
+}
+main .profile-section nav .profile_ul li{
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  flex:1;
+  align-items: center;
+}
+
+
+
+main .profile-section nav .profile_ul li:hover{
+  background: #1a202c;
+}
+
