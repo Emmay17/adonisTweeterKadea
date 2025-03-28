@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+        Authentification
+    </title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- @stack('dumper') --}}
+    <link href="/resources/css/auth.css" rel="stylesheet">
+  </head>
+
+  <body id="bodyauth" class="flex bg-gray-900 transition duration-50">
+
+    <header class="flex-1 flex flex-col justify-center items-center bg-blue-500 gap-3 p-4">
+        <h1 id="h1text" class="text-[5rem] text-white font-semibold">
+            Welcome back !
+        </h1>
+
+        <p id="hinttext" class="flex text-center text-white text-s font-light p-4">
+            Vous avez pas de compte ?
+        </p>
+
+        <p id="createbtn" class="border-1 rounded-full px-5 py-2 border-white text-white text-lg cursor-pointer ">Crée un compte</p>
+    </header>
+
+    <main class="flex flex-col flex-1 p-5 justify-center items-center ">
+        @include('pages/authentification_interfaces/signininterface')
+        @include('pages/authentification_interfaces/signupinterface')
+    </main>
+
+    <script src="resources/js/auth"></script>
+  </body>
+
+</html>

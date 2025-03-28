@@ -1,0 +1,44 @@
+<form
+  id="formconnect"
+  method="post"
+  action="{{ route('user.login') }}"
+  class="w-[50%] space-y-7 visible border-2 border-blue-500 rounded-[1rem] p-4 flex flex-col justify-center items-center"
+>
+  <h2 class="text-lg font-bold text-white ">
+    Connexion
+  </h2>
+
+  <!-- Champ Email -->
+  @!component('pages/authentification_interfaces/components/inputcomponent', {
+        labelText: 'Email',
+        type: 'email',
+        placeholder: 'johndoe@gmail.com',
+        nameInput: 'email'
+  })
+
+  <!-- Champ Mot de passe -->
+  @!component('pages/authentification_interfaces/components/inputcomponent', {
+        labelText: 'Password',
+        type: 'password',
+        placeholder: 'Enter your password',
+        nameInput: 'password'
+  })
+
+  <!-- Bouton de connexion -->
+  @!component('pages/authentification_interfaces/components/buttoninterface', {
+        type: 'submit',
+        textbtn: 'Sign in '
+  })
+
+  <!-- Lien vers l'inscription -->
+
+  @inputError('password')
+    @each(message in $messages)
+      <p class="text-red-500 text-center font-bold">
+        {{ message }}
+      </p>
+    @end
+  @end
+  
+</form>
+

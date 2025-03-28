@@ -9,7 +9,7 @@
     display : flex;
     box-sizing: border-box;
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
   }
 
   :root{
@@ -91,13 +91,13 @@ textarea{
     font-size: 1.1875rem;
   }
 
-  .leftAside button {
+  /* .leftAside ul button {
     width: auto;
     height: 3.25rem;
     color: white;
     background: var(--bluebutton);
     border-radius:50vmax;
-  }
+  } */
   .leftAside img{
     width: var(--imgRoundedSize);
     height: var(--imgRoundedSize);

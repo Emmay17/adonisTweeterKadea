@@ -1,8 +1,9 @@
 <nav>
 <ul >
-    @if(postes && postes.length > 0)
+    @if(postes )
     
     @each (item in postes)
+            @if(item.id_user === user.id)
     <li class="flex flex-row gap-3 p-4 post" data-id="{{item.id_post}}">
         <div>
             <img src="{{item.user.img}}" alt="img profile" class="w-12 h-12 rounded-full object-cover">
@@ -35,6 +36,7 @@
             </nav>
         </div>
     </li>
+    @endif
     @endeach
 
     @else

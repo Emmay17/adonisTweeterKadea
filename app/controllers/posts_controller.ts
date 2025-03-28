@@ -27,8 +27,14 @@ export default class PostsController {
         })
         return view.render('pages/dashboard', { postes , user: Users[0]})
     }
-
-    public async savePost({request,response}:HttpContext){
+    // public async getPostsProfile({ view }: HttpContext) {
+    //     const postes = posts.filter((post: any) => {
+    //         const user = Users.find((u: any) => u.id === post.id_user)
+    //         return { ...post,user}
+    //     })
+    //     return view.render('pages/dashboard', { postes , user: Users[0]})
+    // }
+    public async savePost({request,response, view}:HttpContext){
         const data = request.all() as Partial<Post>;
 
         if (!data.id_user || !data.content) {
@@ -49,6 +55,6 @@ export default class PostsController {
 
         posts.unshift(newPost);
 
-        return response.redirect().toRoute('/dashboard')
+        return response.redirect().toPath('/dashboard?')
     }
 }

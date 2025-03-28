@@ -75,11 +75,9 @@
     </nav>
 
     <div id="posts" class="profileSection">
-        @each(poste in postes)
-            @if(poste.id_user === user.id)
-            @!component('pages/components/postProfile', { postes })
-            @endif
-        @endeach
+       
+            @!component('pages/components/postProfile', { postes, user })
+         
 
     </div>
 

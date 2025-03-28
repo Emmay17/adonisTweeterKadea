@@ -1,0 +1,44 @@
+<form
+  id="formregister"
+  method="post"
+  action="{{route('user.register')}}"
+  class="w-[50%] space-y-5 hidden"
+>
+  <h2 class="text-xl font-semibold text-white">
+    Inscription
+  </h2>
+
+  <!-- Champ Nom complet -->
+  @!component('pages/authentification_interfaces/components/inputcomponent', {
+        labelText: 'Nom complet',
+        type: 'text',
+        placeholder: 'john doe',
+        nameInput: 'full_name'
+  })
+
+  <!-- Champ Email -->
+  @!component('pages/authentification_interfaces/components/inputcomponent', {
+        labelText: 'Adresse Email',
+        type: 'email',
+        placeholder: 'exemple@gmail.com',
+        nameInput: 'email'
+  })
+
+  <!-- Champ Mot de passe -->
+  @!component('pages/authentification_interfaces/components/inputcomponent', {
+        labelText: 'Mot de passe',
+        type: 'password',
+        placeholder: 'your password',
+        nameInput: 'password'
+  })
+
+  <!-- Bouton Inscription-->
+  @!component('pages/authentification_interfaces/components/buttoninterface', {
+        type: 'submit',
+        textbtn: 'S\'inscrire'
+  })
+
+  <!-- Lien vers l'inscription -->
+
+</form>
+
