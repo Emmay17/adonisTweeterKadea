@@ -111,18 +111,45 @@ document.querySelectorAll('.reactionBtnList').forEach((list) => {
   })
 })
 
-function incrementLike(event) {
+async function incrementLike(event) {
   let postElement = event.target.closest('.post') // Trouver le post parent
   let likeCountElement = postElement.querySelector('.like-count') // Sélectionner l'affichage du like
   let likeimg = postElement.querySelector('.likeicon')
 
-  if (likeimg.src.includes('like.svg')) {
-    likeimg.src = '../../public/heart.png'
-    likeCountElement.textContent = parseInt(likeCountElement.textContent) + 1 // Mettre à jour l'affichage
-  } else {
-    likeimg.src = '../../public/like.svg'
-    likeCountElement.textContent = parseInt(likeCountElement.textContent) - 1
+  let postID = postElement.getAttribute('data-id') // Récupérer l'ID du post
+  console.log('Post ID : ' + postID)
+
+  let isLiked = likeimg.src.includes('like.svg') // Vérifier si le post est déjà liké
+
+  likeimg.src = isLiked ? '../../public/heart.png' : '../../public/like.svg' // Changer l'image
+
+  likeCountElement.textContent = parseInt(likeCountElement.textContent) + (isLiked ? 1 : -1)
+
+  try {
+    let response = await fetch(`/posts/${postID}/like`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ increment : isLiked }),
+    })
+
+    if (!response.ok) {
+      throw new Error('Erreur lors de la mise à jour du like')
+    }
+  } catch (error) {
+    // console.error(error)
+    alert("Impossible d'ajouter un like. Veuillez réessayer." + error)
+
+    // Annuler la modification locale en cas d'échec
+    likeimg.src = isLiked ? '../../public/like.svg' : '../../public/heart.png'
+    likeCountElement.textContent = parseInt(likeCountElement.textContent) - (isLiked ? 1 : -1)
   }
+  // if (likeimg.src.includes('like.svg')) {
+  //   likeimg.src = '../../public/heart.png'
+  //   likeCountElement.textContent = parseInt(likeCountElement.textContent) + 1 // Mettre à jour l'affichage
+  // } else {
+  //   likeimg.src = '../../public/like.svg'
+  //   likeCountElement.textContent = parseInt(likeCountElement.textContent) - 1
+  // }
 }
 
 document.getElementById('postInputForm').addEventListener('submit', async function (event) {
@@ -136,13 +163,19 @@ document.getElementById('postInputForm').addEventListener('submit', async functi
     content: content,
   }
 
-  try {
-    console.log('Données envoyées :', sendData)
+  await submitPost(sendData)
+  event.preventDefault() // Empêche le rechargement de la page
+  
+})
 
-    const response = await fetch('/posts/save', {
+async function submitPost(data){
+  try {
+    console.log('Données envoyées :', data)
+
+    const response = await fetch('/posts/saveDB', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(sendData),
+      body: JSON.stringify(data),
     })
 
     if (!response.ok && response.status !== 302) {
@@ -158,7 +191,7 @@ document.getElementById('postInputForm').addEventListener('submit', async functi
     console.log(error)
     alert(`Erreur de l'envoi du post`)
   }
-})
+}
 
 const mediaIcon = document.getElementById('media-icon')
 const fileInput = document.getElementById('file-input')

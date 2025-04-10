@@ -2,15 +2,19 @@ export const Users = [
     {
         id: 1,
         username: "@MayeleEmmanuel",
+        email: "Ojg6o@example.com",
         nom: "Mayele",
         prenom: "Emmanuel",
+        password: "1234",
         img: "https://images.pexels.com/photos/2876486/pexels-photo-2876486.png?auto=compress&cs=tinysrgb&w=800"
     },
     {
         id: 2,
         username: "@GadNtenta",
+        email: "r1oNt@example.com",
         nom: "Ntenta",
         prenom: "Gad",
+        password: "1234",
         img: "https://images.pexels.com/photos/3031391/pexels-photo-3031391.jpeg?auto=compress&cs=tinysrgb&w=800"
     }
 ]

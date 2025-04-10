@@ -14,7 +14,7 @@ createAccountBtn.addEventListener('click', function () {
         // Afficher le formulaire de connexion et masquer l'inscription
         formConnect.classList.remove('hidden');
         formRegister.classList.add('hidden');
-        montext.textContent = "Welcome back !"
+        // montext.textContent = "Welcome back !"
         inttext.textContent = "Vous avez pas de compte ?"
         bodytoogle.classList.remove('flex-row-reverse')
         createAccountBtn.textContent = "Créer un compte"; // Modifier le texte du bouton
@@ -24,7 +24,7 @@ createAccountBtn.addEventListener('click', function () {
         formConnect.classList.remove('visible');
         formRegister.classList.remove('hidden');
         inttext.textContent = "Vous avez déjà un compte ?"
-        montext.textContent = "Hello !"
+        // montext.textContent = "Hello !"
         bodytoogle.classList.add('flex-row-reverse')
         createAccountBtn.textContent = "Se connecter"; // Modifier le texte du bouton
     }
