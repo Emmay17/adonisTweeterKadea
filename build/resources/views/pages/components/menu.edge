@@ -1,0 +1,84 @@
+<div class="menuDiv">
+  <img src="/public/tweeter.svg" alt="tweeter" class="icon" />
+  <nav class="menuNav">
+    <ul>
+      <li data-id="Home">
+        <img src="/public/home.svg" alt="home icon" class="icon" />
+        <p>
+          Home
+        </p>
+      </li>
+      <li data-id="Explore">
+        <img src="/public/hashtag.svg" alt="explore icon" class="icon" />
+        <p>
+          Explore
+        </p>
+      </li>
+      <li data-id="Notifications">
+        <img src="/public/notification.svg" alt="notifications icon" class="icon" />
+        <p>
+          Notifications
+        </p>
+      </li>
+      <li data-id="Messages">
+        <img src="/public/message.svg" alt="messages icon" class="icon" />
+        <p>
+          Messages
+        </p>
+      </li>
+      <li data-id="Bookmarks">
+        <img src="/public/bookmark.svg" alt="bookmarks icon" class="icon" />
+        <p>
+          Bookmarks
+        </p>
+      </li>
+      <li data-id="Lists">
+        <img src="/public/list.svg" alt="lists icon" class="icon" />
+        <p>
+          Lists
+        </p>
+      </li>
+      <li data-id="Profile">
+        <img src="/public/profil.svg" alt="profile icon" class="icon" />
+        <p>
+          Profile
+        </p>
+      </li>
+      <li data-id="More">
+        <img src="/public/more.svg" alt="more icon" class="icon" />
+        <p>
+          More
+        </p>
+      </li>
+
+      <li data-id="More">
+        <form method="post" action="{{ route('auth.logout') }}" class="flex items-center gap-3">
+
+          <img src="/public/logout.svg" alt="more icon" class="icon" />
+          <button type="submit" class="text-red-500 p-2 ">
+            LogOut
+          </button>
+        </form>
+
+      </li>
+    </ul>
+  </nav>
+  <button class="bg-[var(--bluebutton)] text-white p-2 rounded-full">
+    Tweet
+  </button>
+
+</div>
+
+<div class="userDetail">
+  <img src="{{ user.img }}" alt="profile_img" class="w-12 h-12 rounded-full object-cover" />
+  <div>
+    <div class="flex flex-row gap-[1px]">
+      <p>
+        {{ user.prenom }} {{ user.nom }}
+      </p>
+      <img src="/public/cadenas.svg" alt="cadenasIcon" class="icon" />
+    </div>
+    <span>{{ user.username }}</span>
+  </div>
+  <img src="/public/More-2.svg" alt="more-2" class="icon" />
+</div>

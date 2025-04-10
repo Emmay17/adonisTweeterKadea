@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+        Clone X
+    </title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- @stack('dumper') --}}
+    <link href="/resources/css/dashboard.css" rel="stylesheet">
+</head>
+
+<body>
+    <aside class="leftAside w-[10%]">
+        @include('pages/components/menu')
+    </aside>
+
+    <main class="overflow-auto  border-x-[0.5px] border-gray-500 gap-3 flex flex-col max-w-[37.5rem] w-[60%] content-section.active">
+        @include('pages/menu/home')
+        @include('pages/menu/explore')
+        @include('pages/menu/profile')
+        @include('pages/menu/messages')
+        @include('pages/menu/notification')
+        @include('pages/menu/more')
+        @include('pages/menu/list')
+        @include('pages/menu/bookmark')
+    </main>
+
+    <aside class="flex flex-col p-4 overflow-x-auto gap-5 w-[30%]">
+        @include('pages/components/searchSection')
+    </aside>
+
+    <script src="/resources/js/dashboard.js"></script>
+</body>
+
+</html>

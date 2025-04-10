@@ -1,0 +1,31 @@
+<section class="flex flex-col gap-5 p-4">
+    <h1 class="text-lg font-bold">Permissions list</h1>
+
+    @if(allPermission && allPermission.length > 0)
+        <table class="w-full">
+            <thead >
+                <tr class="bg-blue-500 justify-between text-white ">
+                    <th class="w-[15%] text-left border border-gray-300 p-2">Identifiant</th>
+                    <th class="w-[15%] text-left border border-gray-300 p-2">Labelle</th>
+                    <th class="w-[40%] text-left border border-gray-300 p-2">Description</th>
+                    <th class="w-[15%] text-left border border-gray-300 p-2">Date Création</th>
+                    <th class="w-[15%] text-left border border-gray-300 p-2">Date Modification</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @each(item in allPermission)
+                    <tr>
+                        <td class="w-[15%] border border-gray-300 p-2">{{ item.idpermission ?? "rien du tout" }}</td>
+                        <td class="w-[15%] border border-gray-300 p-2">{{ item.labelle ?? "rien du tout" }}</td>
+                        <td class="w-[40%] border border-gray-300 p-2">{{ item.description ?? "rien du tout" }}</td>
+                        <td class="w-[15%] border border-gray-300 p-2">{{ item.created_at}}</td>
+                        <td class="w-[15%] border border-gray-300 p-2">{{ item.updated_at}}</td>
+                    </tr>
+                @endeach
+            </tbody>
+        </table>
+    @else
+        <p>Aucune permission dans la base.</p>
+    @endif
+</section>

@@ -1,0 +1,21 @@
+<form method="{{methode}}" action="{{actionUrl}}" class="w-full">
+    <h2>Connexion</h2>
+    @!component('pages/authentification_interfaces/components/inputcomponent', {
+        labelText: 'Email',
+        type : 'email',
+        placeholder : 'exemple@gmail.com',
+        nameInput : 'email'
+    })
+
+    @!component('pages/authentification_interfaces/components/inputcomponent', {
+        labelText: 'password',
+        type : 'password',
+        placeholder : 'enter your password',
+        nameInput : 'password'
+    })
+
+    @!component('pages/authentification_interfaces/components/buttoninterface', {
+        type : 'submit',
+        textbtn : 'Se connecter'
+    })
+</form>

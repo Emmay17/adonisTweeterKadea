@@ -1,0 +1,104 @@
+<div id="profile" class="content-section flex flex-col gap-2 profile-section">
+    <div class="flex flex-col gap-2 p-4 ">
+        <h1 class="font-bold">
+            {{user.prenom}}
+        </h1>
+
+        <span class="text-xs text-gray-500">
+            {{postes.length}} posts
+        </span>
+    </div>
+
+    <div class="relative w-full h-50 bg-gray-500  flex justify-center items-center">
+        <img src="{{user.img}}"
+            class="absolute -bottom-10 w-30 h-30 left-10 rounded-full border-3 border-black object-cover">
+    </div>
+
+    <div class="p-2">
+        <button
+            class="absolute right-5 border-1 border-gray-500 rounded-[50px] py-2 px-4 font-bold text-[15px] cursor-pointer">
+            Edit profile
+        </button>
+    </div>
+
+    <div class="px-4 mt-10">
+        <p class="font-bold text-[20px]">{{user.prenom}}</p>
+        <span class="text-gray-500 text-[15px]">{{user.username}}</span>
+    </div>
+
+    <div class="px-4 ">
+        <p class="text-[15px]">
+            Country Actualités de l'Industrie Hip-Hop/Rap Télévision RnB/Soul Créateurs du Numérique Musique Latine
+            Films Musique Pop
+        </p>
+
+        <p class="text-blue-400 hover:underline cursor-pointer text-[13px]">Translate bio</p>
+    </div>
+
+    <div class="text-gray-500 flex gap-5 px-4 text-[15px]">
+        <div>
+            <img>
+            <p>
+                Democratic Republic of Congo
+            </p>
+        </div>
+
+        <div>
+            <img>
+            <p>
+                Joined May 2018
+            </p>
+        </div>
+    </div>
+
+    <div class="flex px-4 gap-4">
+        <p>
+            67
+            <span class="text-gray-500">Following</span>
+        </p>
+
+        <p>
+            0
+            <span class="text-gray-500">Followers</span>
+        </p>
+    </div>
+
+    <nav class="w-full border-b-[0.5px] border-gray-500 tablistnav">
+        <ul class="flex flex-row justify-between  text-gray-500 profile_ul">
+            <li data-id="posts" class="bordercss.active">Posts</li>
+            <li data-id="replies" class="bordercss">Replies</li>
+            <li data-id="highlights" class="bordercss">Highlights</li>
+            <li data-id="articles" class="bordercss">Articles</li>
+            <li data-id="media" class="bordercss">Media</li>
+            <li data-id="likes" class="bordercss">Likes</li>
+        </ul>
+    </nav>
+
+    <div id="posts" class="profileSection">
+       
+            @!component('pages/components/postProfile', { postes, user })
+         
+
+    </div>
+
+    <div id="replies" class="profileSection flex justify-center items-center">
+        <p class="text-gray-500 font-bold">Replies section</p>
+    </div>
+
+    <div id="highlights" class="profileSection flex justify-center items-center">
+        <p class="text-gray-500 font-bold">Highlights section</p>
+
+    </div>
+
+    <div id="articles" class="profileSection flex justify-center items-center">
+        <p class="text-gray-500 font-bold">Articles section</p>
+    </div >
+
+    <div id="media" class="profileSection flex justify-center items-center">
+        <p class="text-gray-500 font-bold">Media section</p>
+    </div>
+
+    <div id="likes" class="profileSection flex justify-center items-center">
+        <p class="text-gray-500 font-bold">Likes section</p>
+    </div>
+</div>
