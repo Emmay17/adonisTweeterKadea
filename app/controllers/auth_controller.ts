@@ -1,8 +1,6 @@
 import User from '#models/user'
 import { registerAuthValidator, loginAuthValidator } from '#validators/auth'
 import type { HttpContext } from '@adonisjs/core/http'
-import { Users } from '../../public/data.js'
-
 export default class AuthController {
   show({ view }: HttpContext) {
     return view.render('pages/authentification_interfaces/authinterface')

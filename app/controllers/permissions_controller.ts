@@ -3,7 +3,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Permission from '#models/permission';
 
 export default class PermissionsController {
-    async createPermission({ view,request, response }: HttpContext) {
+    async createPermission({ request, response }: HttpContext) {
         const data = request.only(['labelle', 'description']);
 
         try {
