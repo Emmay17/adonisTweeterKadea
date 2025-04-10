@@ -3,7 +3,7 @@ import type { NextFn } from '@adonisjs/core/types/http'
 
 export default class IsAdminMiddleware {
   async handle(ctx: HttpContext, next: NextFn) {
-    const user = ctx.auth.user
+    // const user = ctx.auth.user
     await ctx.auth.check()
     
     // if (user?.permission_id !== 10) {
