@@ -49,7 +49,6 @@
     "postcss": "^8.5.3",
     "prettier": "^3.5.0",
     "tailwindcss": "^4.0.13",
-    "ts-node-maintained": "^10.9.5",
     "typescript": "~5.7",
     "vite": "^6.1.0"
   },
@@ -64,6 +63,7 @@
     "@adonisjs/vite": "^4.0.0",
     "@tailwindcss/vite": "^4.0.13",
     "@vinejs/vine": "^3.0.1",
+    "ts-node-maintained": "^10.9.5",
     "cors": "^2.8.5",
     "edge.js": "^6.2.1",
     "luxon": "^3.5.0",
