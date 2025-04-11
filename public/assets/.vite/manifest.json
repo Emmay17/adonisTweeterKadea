@@ -4,10 +4,43 @@
     "src": "resources/css/app.css",
     "isEntry": true
   },
+  "resources/css/auth.css": {
+    "file": "auth-C_M0prRW.css",
+    "src": "resources/css/auth.css",
+    "isEntry": true
+  },
+  "resources/css/dashboard.css": {
+    "file": "dashboard-xqgLeylj.css",
+    "src": "resources/css/dashboard.css",
+    "isEntry": true
+  },
+  "resources/css/permissions.css": {
+    "file": "permissions-BEZpGah0.css",
+    "src": "resources/css/permissions.css",
+    "isEntry": true
+  },
   "resources/js/app.js": {
     "file": "app-C3S-8paM.js",
     "name": "app",
     "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/auth.js": {
+    "file": "auth-DgSCBtdp.js",
+    "name": "auth",
+    "src": "resources/js/auth.js",
+    "isEntry": true
+  },
+  "resources/js/dashboard.js": {
+    "file": "dashboard-D4nChNjv.js",
+    "name": "dashboard",
+    "src": "resources/js/dashboard.js",
+    "isEntry": true
+  },
+  "resources/js/permisison.js": {
+    "file": "permisison-DhcTtNxM.js",
+    "name": "permisison",
+    "src": "resources/js/permisison.js",
     "isEntry": true
   }
 }

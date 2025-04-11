@@ -12,8 +12,7 @@
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     {{-- @stack('dumper')
     <link href="/resources/css/dashboard.css" rel="stylesheet"> --}}
-    <link href="/resources/css/permissions.css" rel="stylesheet">
-    
+    @vite(['resources/css/permissions.css', 'resources/js/permisison.js'])
 </head>
 
 <body class="">
@@ -28,7 +27,7 @@
         @!component('pages/components/permissionsList', {allPermission})
     </main>
 
-    <script src="/resources/js/permisison.js"></script>
+    {{-- <script src="/resources/js/permisison.js"></script> --}}
 </body>
 
 </html>
