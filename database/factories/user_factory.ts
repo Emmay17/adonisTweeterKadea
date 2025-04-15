@@ -6,8 +6,8 @@ export const UserFactory = factory
     const firstName = faker.person.firstName().charAt(0).toUpperCase()
     const lastName = faker.person.lastName().charAt(0).toUpperCase()
     return {
-      firstName: firstName,
-      lastName: lastName,
+      firstname: firstName,
+      lastname: lastName,
       email: faker.internet.email(),
       password: 'password1234',
     }

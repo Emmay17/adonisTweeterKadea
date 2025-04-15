@@ -19,7 +19,7 @@ export default class AuthController {
       const user = await User.create(body)
       console.log({ user })
       await auth.use('web').login(user)
-      return response.redirect().toRoute('dashboard.login', {data : user})
+      return response.redirect().toRoute('dashboard.login', { data: user })
     } catch (error) {
       return response.badRequest(error)
     }
@@ -30,29 +30,29 @@ export default class AuthController {
     const body = await loginAuthValidator.validate(requestBody)
     const { email, password } = body
 
-    const user = (await User.verifyCredentials(email, password))
+    const user = await User.verifyCredentials(email, password)
     // const user = Users.find((user) => user.email === email && user.password === password)
 
     await auth.use('web').login(user)
 
-    return response.redirect().toRoute('dashboard.login', {data : user})
+    return response.redirect().toRoute('dashboard.login', { data: user })
   }
 
-  async logOut(ctx:HttpContext){
+  async logOut(ctx: HttpContext) {
     await ctx.auth.use('web').logout()
     return ctx.response.redirect().toPath('/auth')
   }
 
-  async allusers({ response} : HttpContext){
+  async allusers({ response }: HttpContext) {
     try {
       const users = await User.all()
 
-      if(!users){
+      if (!users) {
         throw new Error('Aucun Utilisateur dans la base de données')
       }
       return response.json(users)
     } catch (error) {
-      throw new Error('Erreur lors de la récupération des utilisateurs :'+error)
+      throw new Error('Erreur lors de la récupération des utilisateurs :' + error)
     }
   }
 }

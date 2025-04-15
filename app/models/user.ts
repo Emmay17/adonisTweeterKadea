@@ -14,7 +14,10 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare id: number
 
   @column()
-  declare full_name: string | null
+  declare firstname: string 
+
+  @column()
+  declare lastname: string 
 
   @column()
   declare email: string
@@ -22,19 +25,16 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column({ serializeAs: null })
   declare password: string
 
-  @column()
-  declare permission_id? : number 
-
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime 
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
-  @beforeCreate()
-  public static assignDefaultPermission(user: User) {
-    if (!user.permission_id) {
-      user.permission_id = 10
-    }
-  }
+  // @beforeCreate()
+  // public static assignDefaultPermission(user: User) {
+  //   if (!user.permission_id) {
+  //     user.permission_id = 10
+  //   }
+  // }
 }
