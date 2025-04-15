@@ -10,18 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { DateTime } from 'luxon';
 import hash from '@adonisjs/core/services/hash';
 import { compose } from '@adonisjs/core/helpers';
-import { BaseModel, beforeCreate, column } from '@adonisjs/lucid/orm';
+import { BaseModel, column } from '@adonisjs/lucid/orm';
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid';
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
     uids: ['email'],
     passwordColumnName: 'password',
 });
 export default class User extends compose(BaseModel, AuthFinder) {
-    static assignDefaultPermission(user) {
-        if (!user.permission_id) {
-            user.permission_id = 10;
-        }
-    }
 }
 __decorate([
     column({ isPrimary: true }),
@@ -29,8 +24,12 @@ __decorate([
 ], User.prototype, "id", void 0);
 __decorate([
     column(),
-    __metadata("design:type", Object)
-], User.prototype, "full_name", void 0);
+    __metadata("design:type", String)
+], User.prototype, "firstname", void 0);
+__decorate([
+    column(),
+    __metadata("design:type", String)
+], User.prototype, "lastname", void 0);
 __decorate([
     column(),
     __metadata("design:type", String)
@@ -40,10 +39,6 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
 __decorate([
-    column(),
-    __metadata("design:type", Number)
-], User.prototype, "permission_id", void 0);
-__decorate([
     column.dateTime({ autoCreate: true }),
     __metadata("design:type", DateTime)
 ], User.prototype, "createdAt", void 0);
@@ -51,10 +46,4 @@ __decorate([
     column.dateTime({ autoCreate: true, autoUpdate: true }),
     __metadata("design:type", DateTime)
 ], User.prototype, "updatedAt", void 0);
-__decorate([
-    beforeCreate(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [User]),
-    __metadata("design:returntype", void 0)
-], User, "assignDefaultPermission", null);
 //# sourceMappingURL=user.js.map

@@ -25,4 +25,4 @@ export default class extends BaseSchema {
         this.schema.dropTable(this.tableName);
     }
 }
-//# sourceMappingURL=1742253964006_create_access_tokens_table.js.map
+//# sourceMappingURL=1744737604884_create_access_tokens_table.js.map

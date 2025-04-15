@@ -26,7 +26,7 @@ export default class AuthController {
         const requestBody = request.body();
         const body = await loginAuthValidator.validate(requestBody);
         const { email, password } = body;
-        const user = (await User.verifyCredentials(email, password));
+        const user = await User.verifyCredentials(email, password);
         await auth.use('web').login(user);
         return response.redirect().toRoute('dashboard.login', { data: user });
     }
