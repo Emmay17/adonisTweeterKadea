@@ -6,6 +6,9 @@ import fg from 'fast-glob'
 const cssFiles = fg.sync('resources/css/**/*.css')
 const jsFiles = fg.sync('resources/js/**/*.js')
 export default defineConfig({
+  server: {
+    allowedHosts: ['adonistweeterkadea.onrender.com'],
+  },
   plugins: [
     tailwindcss(),
     adonisjs({
