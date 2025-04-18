@@ -17,7 +17,7 @@ import { middleware } from './kernel.js'
 import TweetsController from '#controllers/tweets_controller'
 // import Router from '@adonisjs/core/services/Route'
 
-
+router.get('/', [AuthController, 'show']).as('home')
 router.get('/dashboard', [PostsController, 'getPosts']).as('dashboard.login').use(middleware.nonPublic())
 
 router.group(() =>{

@@ -4,6 +4,7 @@ import PermissionsController from '#controllers/permissions_controller';
 import AuthController from '#controllers/auth_controller';
 import { middleware } from './kernel.js';
 import TweetsController from '#controllers/tweets_controller';
+router.get('/', [AuthController, 'show']).as('home');
 router.get('/dashboard', [PostsController, 'getPosts']).as('dashboard.login').use(middleware.nonPublic());
 router.group(() => {
     router.post('/saveDB', [PostsController, 'saveOnDatabase']).as('poste.createDB');
