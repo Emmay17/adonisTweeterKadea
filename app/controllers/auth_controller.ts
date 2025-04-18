@@ -25,17 +25,14 @@ export default class AuthController {
     }
   }
 
-  async logIn({ request, auth, response }: HttpContext) {
-    const requestBody = request.body()
-    const body = await loginAuthValidator.validate(requestBody)
-    const { email, password } = body
-
+  async logIn({ request, auth, view }: HttpContext) {
+    const { email, password } = await loginAuthValidator.validate(request.body())
+  
     const user = await User.verifyCredentials(email, password)
-    // const user = Users.find((user) => user.email === email && user.password === password)
-
+  
     await auth.use('web').login(user)
-
-    return response.redirect().toRoute('dashboard.login', { data: user })
+    console.log("voiciiiiiii"+JSON.stringify(user, null, 2))
+    return view.render('dashboard', { data: user })
   }
 
   async logOut(ctx: HttpContext) {
