@@ -8,6 +8,7 @@ export default class extends BaseSchema {
             table.string('lastname').nullable();
             table.string('email').unique().notNullable();
             table.string('password').notNullable();
+            table.string('avatar').nullable();
             table.timestamp('created_at');
             table.timestamp('updated_at');
         });

@@ -1,0 +1,85 @@
+<form
+  id="formregister"
+  method="post"
+  enctype="multipart/form-data"
+  action="{{ route('user.register') }}"
+  class="w-[100%] space-y-7 bg-gray-800 rounded-[1rem] p-4 flex flex-col justify-center items-center hidden "
+>
+  <h2 class="text-xl font-semibold text-white">
+    Inscription
+  </h2>
+  <!-- Image de preview (clic dessus déclenche le sélecteur) -->
+  <label for="avatarInput">
+    <img
+      id="avatarPreview"
+      src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
+      class="h-60 w-60 rounded-full object-cover shadow-md"
+      alt="Preview"
+    />
+  </label>
+
+  <input type="file" name="avatar" id="avatarInput" class="hidden" accept="image/*"/>
+
+
+  <div class="flex flex-row gap-3 w-full">
+    <!-- Champ Nom complet -->
+    @!component('pages/authentification_interfaces/components/inputcomponent', {
+        labelText: 'Nom',
+        type: 'text',
+        placeholder: 'votre nom',
+        nameInput: 'firstname'
+    })
+
+    <!-- Champ Nom complet -->
+    @!component('pages/authentification_interfaces/components/inputcomponent', {
+      labelText: 'Prenom',
+      type: 'text',
+      placeholder: 'prenom',
+      nameInput: 'lastname'
+    })
+  </div>
+
+  <div class="flex flex-row gap-3 w-full">
+    <!-- Champ Email -->
+    @!component('pages/authentification_interfaces/components/inputcomponent', {
+        labelText: 'Adresse Email',
+        type: 'email',
+        placeholder: 'exemple@gmail.com',
+        nameInput: 'email'
+    })
+    <!-- Champ Mot de passe -->
+
+    @!component('pages/authentification_interfaces/components/inputcomponent', {
+            labelText: 'Mot de passe',
+            type: 'password',
+            placeholder: 'your password',
+            nameInput: 'password'
+    })
+
+  </div>
+
+  <!-- Bouton Inscription-->
+  @!component('pages/authentification_interfaces/components/buttoninterface', {
+      type: 'submit',
+      textbtn: 'S\'inscrire'
+  })
+  <!-- Lien vers l'inscription -->
+
+</form>
+
+<script>
+  const input = document.getElementById("avatarInput");
+  
+  const preview = document.getElementById("avatarPreview");
+  
+  input.addEventListener("change", event => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        preview.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+</script>

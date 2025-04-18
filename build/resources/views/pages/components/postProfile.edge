@@ -1,20 +1,20 @@
 <nav>
 <ul >
-    @if(postes )
+    @if(postes.length > 0)
     
     @each (item in postes)
-            @if(item.id_user === user.id)
+            @if(item.idUser === item.user.id)
     <li class="flex flex-row gap-3 p-4 post" data-id="{{item.id_post}}">
         <div>
-            <img src="{{item.user.img}}" alt="img profile" class="w-12 h-12 rounded-full object-cover">
+            <img src="{{item.user.avatar}}" alt="img profile" class="w-12 h-12 rounded-full object-cover">
         </div>
 
         <div class="flex flex-col gap-3 w-[80%] flex-grow">
             <!-- Header with user info -->
             <div class="flex gap-2 items-center">
-                <p class="font-semibold">{{ item.user.prenom}} {{item.user.nom}}</p>
+                <p class="font-semibold">{{ item.user.firstname}} {{item.user.lastname}}</p>
                 <img src="/Group.svg" alt="checkIcon" class="w-5 h-5">
-                <span class="text-gray-500">{{ item.user.username }}.</span>
+                <span class="text-gray-500">{{ '@'+item.user.firstname+'_' }}.</span>
                 <span class="text-gray-500">2h</span>
             </div>
 

@@ -1,0 +1,52 @@
+<div class="flex flex-row gap-3 paddingBottom">
+    <img src="{{session.get('data').avatar}}" alt="profile_img" class="w-12 h-12 rounded-full object-cover">
+  
+    <form action="/posts/saveDB" method="POST" enctype="multipart/form-data" class="w-full" id="postInputForm">
+        <textarea name="content" id="autoResize" placeholder="What's happening?" class="w-full"></textarea>
+      
+        <div id="preview-container" class="mt-4">
+        <img id="preview" class="w-full mt-3 object-cover h-[Auto] rounded-xl hidden" alt="Aperçu">
+      </div>
+  
+      <input type="hidden" name="id_user" id="id_user" value="{{session.get('data').id}}">
+  
+      <div class="flex flex-row justify-between items-end">
+        <nav>
+          <ul class="flex flex-row gap-3">
+            <li>
+              <label for="file-input" style="cursor: pointer;">
+                <img id="media-icon" src="/Icons/Media.svg" alt="icon">
+              </label>
+              <input type="file" name="media" id="file-input" accept="image/*" class="hidden" onchange="previewImage(event)">
+            </li>
+            <li><img src="/Icons/Gif.svg" alt="icon"></li>
+            <li><img src="/Icons/Poll.svg" alt="icon"></li>
+            <li><img src="/Icons/Emoji.svg" alt="icon"></li>
+            <li><img src="/Icons/Schedule.svg" alt="icon"></li>
+          </ul>
+        </nav>
+  
+        <button type="submit" class="w-[4.9375rem] h-[2.25rem] bg-[var(--bluebutton)] rounded-full" id="btnTweetHome">Tweet</button>
+      </div>
+    </form>
+  </div>
+  
+  <script>
+    document.getElementById('media-icon').addEventListener('click', function (e) {
+        e.stopPropagation(); // ← empêche le double déclenchement
+      });
+    function previewImage(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      const imagePreview = document.getElementById('preview');
+  
+      if (file) {
+        reader.onload = function(e) {
+          imagePreview.src = e.target.result;
+          imagePreview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  </script>
+  

@@ -1,10 +1,11 @@
 import User from '#models/user';
 import { registerAuthValidator, loginAuthValidator } from '#validators/auth';
+import CloudinaryService from '#services/CloudinaryService';
 export default class AuthController {
     show({ view }) {
         return view.render('pages/authentification_interfaces/authinterface');
     }
-    async register({ request, auth, response }) {
+    async register({ request, auth, response, session }) {
         try {
             const requestBody = request.body();
             const { email } = requestBody;
@@ -13,25 +14,50 @@ export default class AuthController {
             if (userexist) {
                 return response.badRequest('Email existant');
             }
-            const user = await User.create(body);
-            console.log({ user });
+            const file = request.file('avatar', {
+                extnames: ['jpg', 'png', 'jpeg'],
+                size: '10mb',
+            });
+            let avatarUrl = null;
+            if (file && file.tmpPath) {
+                const uploaded = await CloudinaryService.upload(file.tmpPath);
+                avatarUrl = uploaded.secure_url;
+            }
+            const user = await User.create({
+                ...body,
+                avatar: avatarUrl?.toString(),
+            });
             await auth.use('web').login(user);
+            session.put('data', {
+                id: user.id,
+                email: user.email,
+                firstname: user.firstname,
+                lastname: user.lastname,
+                avatar: user.avatar,
+            });
             return response.redirect().toRoute('dashboard.login', { data: user });
         }
         catch (error) {
+            console.error(error);
             return response.badRequest(error);
         }
     }
-    async logIn({ request, auth, response }) {
-        const requestBody = request.body();
-        const body = await loginAuthValidator.validate(requestBody);
-        const { email, password } = body;
+    async logIn(ctx) {
+        const { email, password } = await loginAuthValidator.validate(ctx.request.body());
         const user = await User.verifyCredentials(email, password);
-        await auth.use('web').login(user);
-        return response.redirect().toRoute('dashboard.login', { data: user });
+        await ctx.auth.use('web').login(user);
+        ctx.session.put('data', {
+            id: user.id,
+            email: user.email,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            avatar: user.avatar,
+        });
+        return ctx.response.redirect().toPath('/dashboard');
     }
     async logOut(ctx) {
         await ctx.auth.use('web').logout();
+        ctx.session.forget('data');
         return ctx.response.redirect().toPath('/auth');
     }
     async allusers({ response }) {

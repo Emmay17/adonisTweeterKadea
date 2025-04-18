@@ -1,21 +1,21 @@
 {
   "resources/css/app.css": {
-    "file": "app-tTeqq2lE.css",
+    "file": "app-BFCGGn1M.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/css/auth.css": {
-    "file": "auth-C_M0prRW.css",
+    "file": "auth-ziJ3dIYZ.css",
     "src": "resources/css/auth.css",
     "isEntry": true
   },
   "resources/css/dashboard.css": {
-    "file": "dashboard-xqgLeylj.css",
+    "file": "dashboard-B5FiXzH1.css",
     "src": "resources/css/dashboard.css",
     "isEntry": true
   },
   "resources/css/permissions.css": {
-    "file": "permissions-BEZpGah0.css",
+    "file": "permissions-BqStVEsT.css",
     "src": "resources/css/permissions.css",
     "isEntry": true
   },
@@ -32,7 +32,7 @@
     "isEntry": true
   },
   "resources/js/dashboard.js": {
-    "file": "dashboard-D4nChNjv.js",
+    "file": "dashboard-BAyM_9Sf.js",
     "name": "dashboard",
     "src": "resources/js/dashboard.js",
     "isEntry": true

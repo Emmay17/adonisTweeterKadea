@@ -8,8 +8,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { DateTime } from 'luxon';
-import { BaseModel, column } from '@adonisjs/lucid/orm';
+import { BaseModel, belongsTo, column, hasMany } from '@adonisjs/lucid/orm';
+import User from './user.js';
+import Media from './media.js';
 export default class Poste extends BaseModel {
+    user;
+    medias;
+    replies;
 }
 __decorate([
     column({ isPrimary: true }),
@@ -23,10 +28,6 @@ __decorate([
     column(),
     __metadata("design:type", String)
 ], Poste.prototype, "content", void 0);
-__decorate([
-    column(),
-    __metadata("design:type", String)
-], Poste.prototype, "image", void 0);
 __decorate([
     column(),
     __metadata("design:type", Number)
@@ -43,4 +44,20 @@ __decorate([
     column.dateTime({ autoCreate: true }),
     __metadata("design:type", DateTime)
 ], Poste.prototype, "created_at", void 0);
+__decorate([
+    belongsTo(() => User, {
+        foreignKey: 'id_user'
+    }),
+    __metadata("design:type", Object)
+], Poste.prototype, "user", void 0);
+__decorate([
+    hasMany(() => Media, { foreignKey: 'poste_id' }),
+    __metadata("design:type", Object)
+], Poste.prototype, "medias", void 0);
+__decorate([
+    hasMany(() => Poste, {
+        foreignKey: 'parent',
+    }),
+    __metadata("design:type", Object)
+], Poste.prototype, "replies", void 0);
 //# sourceMappingURL=poste.js.map

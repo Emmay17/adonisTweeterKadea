@@ -7,47 +7,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm';
+import Poste from './poste.js';
 import { DateTime } from 'luxon';
-import hash from '@adonisjs/core/services/hash';
-import { compose } from '@adonisjs/core/helpers';
-import { BaseModel, column } from '@adonisjs/lucid/orm';
-import { withAuthFinder } from '@adonisjs/auth/mixins/lucid';
-const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
-    uids: ['email'],
-    passwordColumnName: 'password',
-});
-export default class User extends compose(BaseModel, AuthFinder) {
+export default class Media extends BaseModel {
+    static table = 'medias';
+    poste;
 }
 __decorate([
     column({ isPrimary: true }),
     __metadata("design:type", Number)
-], User.prototype, "id", void 0);
+], Media.prototype, "id", void 0);
+__decorate([
+    column(),
+    __metadata("design:type", Number)
+], Media.prototype, "poste_id", void 0);
 __decorate([
     column(),
     __metadata("design:type", String)
-], User.prototype, "firstname", void 0);
+], Media.prototype, "url", void 0);
 __decorate([
     column(),
     __metadata("design:type", String)
-], User.prototype, "lastname", void 0);
-__decorate([
-    column(),
-    __metadata("design:type", String)
-], User.prototype, "email", void 0);
-__decorate([
-    column(),
-    __metadata("design:type", String)
-], User.prototype, "avatar", void 0);
-__decorate([
-    column({ serializeAs: null }),
-    __metadata("design:type", String)
-], User.prototype, "password", void 0);
+], Media.prototype, "type", void 0);
 __decorate([
     column.dateTime({ autoCreate: true }),
     __metadata("design:type", DateTime)
-], User.prototype, "createdAt", void 0);
+], Media.prototype, "createdAt", void 0);
 __decorate([
-    column.dateTime({ autoCreate: true, autoUpdate: true }),
-    __metadata("design:type", DateTime)
-], User.prototype, "updatedAt", void 0);
-//# sourceMappingURL=user.js.map
+    belongsTo(() => Poste, { foreignKey: 'poste_id' }),
+    __metadata("design:type", Object)
+], Media.prototype, "poste", void 0);
+//# sourceMappingURL=media.js.map

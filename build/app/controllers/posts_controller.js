@@ -1,86 +1,46 @@
-import { posts, Users } from '../../public/data.js';
 import Poste from '#models/poste';
-import { addpost } from '#validators/poste';
+import Media from '#models/media';
+import CloudinaryService from '#services/CloudinaryService';
 export default class PostsController {
-    async getPosts({ view }) {
-        const postes = posts.map((post) => {
-            const user = Users.find((u) => u.id === post.id_user);
-            return { ...post, user };
-        });
-        return view.render('pages/dashboard', { postes, user: Users[0] });
-    }
-    async savePost({ request, response }) {
-        const data = request.all();
-        if (!data.id_user || !data.content) {
-            return response.status(400).json({ error: 'Données manquantes' });
+    async getPosts(ctx) {
+        const user = ctx.auth.user;
+        if (!user) {
+            return ctx.response.redirect().toPath('/auth');
         }
-        console.log('Données envoyées :', data);
-        const newPost = {
-            id_user: data.id_user,
-            id_post: data.id_post ?? posts.length + 1,
-            content: data.content,
-            comment: 0,
-            partage: 0,
-            likes: 0,
-            image: data.image ?? '',
-        };
-        posts.unshift(newPost);
-        return response.redirect().toPath('/dashboard?');
+        const postes = await Poste.query().preload('user', (query) => {
+            query.select('id', 'firstname', 'lastname', 'avatar');
+        }).preload('medias').orderBy('created_at', 'desc');
+        console.log(JSON.stringify(postes, null, 2));
+        return ctx.view.render('pages/dashboard', { postes });
     }
-    async savePostDB({ request, response }) {
-        const data = request.all();
-        if (!data.id_user || !data.content) {
-            return response.status(400).json({ error: 'Données manquantes' });
-        }
-        console.log('Données envoyées :', data);
-        const newPost = {
-            id_user: data.id_user,
-            id_post: data.id_post ?? posts.length + 1,
-            content: data.content,
-            comment: 0,
-            partage: 0,
-            likes: 0,
-            image: data.image ?? '',
-        };
-        posts.unshift(newPost);
-        return response.redirect().toPath('/dashboard?');
-    }
-    async savelike({ request, response }) {
-        const id = request.param('id');
-        const { increment } = request.body();
+    async saveOnDatabase(ctx) {
+        const data = ctx.request.all();
         try {
-            const post = posts.find((post) => post.id_post === Number(id));
-            if (!post) {
-                return response.status(404).json({ error: 'Post non trouvé' });
-            }
-            if (increment) {
-                post.likes += 1;
-            }
-            else {
-                post.likes -= 1;
-            }
-            return response.status(200).json({ message: 'Like mis à jour' });
-        }
-        catch (error) {
-            return response.status(500).json({ error: 'Erreur interne du serveur' });
-        }
-    }
-    async saveOnDatabase({ request, response }) {
-        try {
-            const data = request.only(['id_user', 'content', 'image']);
-            const validateData = await addpost.validate(data);
-            if (!validateData.id_user || !validateData.content.trim()) {
-                return response.badRequest({ error: 'Données manquantes' });
-            }
-            const newPost = await Poste.create(validateData);
-            return response.created({
-                message: 'Post créé avec succès',
-                post: newPost,
+            const tweet = await Poste.create(data);
+            const files = ctx.request.files('media', {
+                extnames: ['jpg', 'png', 'jpeg'],
+                size: '100mb',
             });
+            for (const file of files) {
+                if (!file.tmpPath)
+                    continue;
+                const result = await CloudinaryService.upload(file.tmpPath);
+                const type = result.resource_type === 'video' ? 'video' : 'image';
+                await Media.create({
+                    poste_id: tweet.id_post,
+                    url: result.secure_url,
+                    type: type,
+                });
+            }
+            return ctx.response.redirect().toPath('/dashboard');
         }
         catch (error) {
-            console.error('Erreur lors de la création du post :', error);
-            return response.internalServerError({ error: 'Erreur serveur' });
+            console.error('Erreur de validation:', JSON.stringify(error, null, 2));
+            const errors = error.formatted || error.messages || error;
+            return ctx.response.internalServerError({
+                message: error.message || "Erreur lors de l'enregistrement du tweet",
+                errors,
+            });
         }
     }
 }

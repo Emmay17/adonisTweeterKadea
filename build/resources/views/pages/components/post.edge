@@ -1,0 +1,56 @@
+<nav>
+  <ul>
+    @if (postes.length > 0)
+      @each (poste in postes)
+        <li class="flex flex-row gap-3 p-4 post" data-id="{{ postes.idPost }}">
+          <div>
+            <img src="{{ poste.user.avatar }}" alt="img profile" class="w-12 h-12 rounded-full object-cover" />
+          </div>
+
+          <div class="flex flex-col gap-3 w-[80%] flex-grow">
+            <!-- Header with user info -->
+            <div class="flex gap-2 items-center">
+              <p class="font-semibold">
+                {{ poste.user.firstname }} {{ poste.user.lastname }}
+              </p>
+              <img src="/Group.svg" alt="checkIcon" class="w-5 h-5" />
+              <span class="text-gray-500">{{ '@'+poste.user.firstname+'_' }}.</span>
+              <span class="text-gray-500">{{poste.createdAt}}</span>
+            </div>
+
+            <!-- Content of the post -->
+            <div>
+              <p class="flex-grow text-white h-auto whitespace-pre-line overflow-scroll max-h-40">
+                {{ poste.content }}
+              </p>
+            </div>
+
+            <!-- Image in the post (if any) -->
+            @each(media in poste.medias)
+              @if(media.type === 'image')
+                <img src="{{ media.url }}" alt="image" loading="lazy" class="w-full rounded-lg mb-2 h-[16rem] object-cover" />
+              @else
+                <video controls class="w-full rounded-lg mb-2">
+                  <source src="{{ media.url }}" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              @endif
+            @endeach
+            
+            
+            <!-- Interaction section (comments, retweets, likes, share) -->
+            <nav class="w-full">
+              @!component('pages/components/reactionBtn', { poste })
+            </nav>
+          </div>
+        </li>
+      @endeach
+    @else
+      <div class="w-full p-4 flex justify-center items-center">
+        <p class="text-lg font-bold text-gray-500">
+          Aucun post pour le moment
+        </p>
+      </div>
+    @endif
+  </ul>
+</nav>
