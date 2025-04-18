@@ -70,15 +70,15 @@
 </div>
 
 <div class="userDetail">
-  <img src="{{ user.img }}" alt="profile_img" class="w-12 h-12 rounded-full object-cover" />
+  <img src="{{session.get('data').avatar}}" alt="profile_img" class="w-12 h-12 rounded-full object-cover" />
   <div>
     <div class="flex flex-row gap-[1px]">
       <p>
-        {{ data.firstname }} {{ data.lastname}}
+        {{ session.get('data').firstname.charAt(0).toUpperCase() + session.get('data').firstname.slice(1).toLowerCase() }} {{session.get('data').lastname.charAt(0).toUpperCase() + session.get('data').lastname.slice(1).toLowerCase()}}
       </p>
       <img src="/cadenas.svg" alt="cadenasIcon" class="icon" />
     </div>
-    <span>{{ user.username }}</span>
+    <span>{{'@'+session.get('data').firstname+'_'}}</span>
   </div>
   <img src="/More-2.svg" alt="more-2" class="icon" />
 </div>

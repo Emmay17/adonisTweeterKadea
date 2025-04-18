@@ -168,30 +168,30 @@ document.getElementById('postInputForm').addEventListener('submit', async functi
   
 })
 
-async function submitPost(data){
-  try {
-    console.log('Données envoyées :', data)
+// async function submitPost(data){
+//   try {
+//     console.log('Données envoyées :', data)
 
-    const response = await fetch('/posts/saveDB', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    })
+//     const response = await fetch('/posts/saveDB', {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify(data),
+//     })
 
-    if (!response.ok && response.status !== 302) {
-      const errorMessage = await response.text()
-      console.error('Erreur :', errorMessage)
-      alert(`Erreur lors de l'ajout du post: ${errorMessage}`)
-      throw new Error(`Erreur du postage du post: ${errorMessage}`)
-    }
+//     if (!response.ok && response.status !== 302) {
+//       const errorMessage = await response.text()
+//       console.error('Erreur :', errorMessage)
+//       alert(`Erreur lors de l'ajout du post: ${errorMessage}`)
+//       throw new Error(`Erreur du postage du post: ${errorMessage}`)
+//     }
 
-    console.log(`Post ajouté !`)
-    document.getElementById('postInputForm').reset()
-  } catch (error) {
-    console.log(error)
-    alert(`Erreur de l'envoi du post`)
-  }
-}
+//     console.log(`Post ajouté !`)
+//     document.getElementById('postInputForm').reset()
+//   } catch (error) {
+//     console.log(error)
+//     alert(`Erreur de l'envoi du post`)
+//   }
+// }
 
 const mediaIcon = document.getElementById('media-icon')
 const fileInput = document.getElementById('file-input')

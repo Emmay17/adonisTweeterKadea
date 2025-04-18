@@ -11,3 +11,7 @@
 .visible {
     display: block;
 }
+
+body{
+    height: 100vh;
+}

@@ -1,16 +1,16 @@
 <div id="profile" class="content-section flex flex-col gap-2 profile-section">
     <div class="flex flex-col gap-2 p-4 ">
         <h1 class="font-bold">
-            {{user.prenom}}
+            {{session.get('data').firstname}} {{session.get('data').lastname}}
         </h1>
 
         <span class="text-xs text-gray-500">
-            {{postes.length}} posts
+            {{-- posts --}}
         </span>
     </div>
 
     <div class="relative w-full h-50 bg-gray-500  flex justify-center items-center">
-        <img src="{{user.img}}"
+        <img src="{{session.get('data').avatar}}"
             class="absolute -bottom-10 w-30 h-30 left-10 rounded-full border-3 border-black object-cover">
     </div>
 
@@ -22,8 +22,8 @@
     </div>
 
     <div class="px-4 mt-10">
-        <p class="font-bold text-[20px]">{{user.prenom}}</p>
-        <span class="text-gray-500 text-[15px]">{{user.username}}</span>
+        <p class="font-bold text-[20px]">{{session.get('data').firstname}}</p>
+        <span class="text-gray-500 text-[15px]">{{session.get('data').lastname}}</span>
     </div>
 
     <div class="px-4 ">

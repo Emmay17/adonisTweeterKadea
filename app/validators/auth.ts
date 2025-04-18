@@ -7,7 +7,8 @@ vine.messagesProvider = new SimpleMessagesProvider({
 
 export const registerAuthValidator = vine.compile(
     vine.object({
-        full_name : vine.string().minLength(3).maxLength(50),
+        firstname : vine.string().minLength(3).maxLength(50),
+        lastname : vine.string().minLength(3).maxLength(50),
         email : vine.string().email(),
         password : vine.string().minLength(4)
     })

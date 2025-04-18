@@ -21,9 +21,9 @@ import TweetsController from '#controllers/tweets_controller'
 router.get('/dashboard', [PostsController, 'getPosts']).as('dashboard.login').use(middleware.nonPublic())
 
 router.group(() =>{
-    router.post('/save', [PostsController, 'savePost']).as('poste.create')
+    // router.post('/save', [PostsController, 'savePost']).as('poste.create')
     router.post('/saveDB', [PostsController, 'saveOnDatabase']).as('poste.createDB')
-    router.post('/:id/Like', [PostsController, 'savelike']).as('poste.like')
+    // router.post('/:id/Like', [PostsController, 'savelike']).as('poste.like')
 }).prefix('/posts')
 
 router.group(() => {

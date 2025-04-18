@@ -1,129 +1,65 @@
-import type { HttpContext } from '@adonisjs/core/http'
-import { posts, Users } from '../../public/data.js'
+import { HttpContext } from '@adonisjs/core/http'
 import Poste from '#models/poste'
-import { addpost } from '#validators/poste'
-
-
-interface Post {
-  id_user: number
-  id_post: number
-  content: string
-  comment: number
-  partage: number
-  likes: number
-  image: string
-}
+import Media from '#models/media'
+import CloudinaryService from '#services/CloudinaryService'
 
 export default class PostsController {
+
   // Méthode pour récupérer les posts et les afficher
-  public async getPosts({ view }: HttpContext) {
-    const postes = posts.map((post: any) => {
-      const user = Users.find((u: any) => u.id === post.id_user)
-      return { ...post, user }
-    })
-    return view.render('pages/dashboard', { postes, user: Users[0] })
-  }
-  // public async getPostsProfile({ view }: HttpContext) {
-  //     const postes = posts.filter((post: any) => {
-  //         const user = Users.find((u: any) => u.id === post.id_user)
-  //         return { ...post,user}
-  //     })
-  //     return view.render('pages/dashboard', { postes , user: Users[0]})
-  // }
-  public async savePost({ request, response }: HttpContext) {
-    const data = request.all() as Partial<Post>
+  public async getPosts(ctx: HttpContext) {
+    // Vérifier si l'utilisateur est connecté
+    const user = ctx.auth.user
 
-    if (!data.id_user || !data.content) {
-      return response.status(400).json({ error: 'Données manquantes' })
+    if (!user) {
+      return ctx.response.redirect().toPath('/auth')  // Si pas connecté, rediriger vers la page de connexion
     }
 
-    console.log('Données envoyées :', data)
-
-    const newPost: Post = {
-      id_user: data.id_user,
-      id_post: data.id_post ?? posts.length + 1,
-      content: data.content,
-      comment: 0,
-      partage: 0,
-      likes: 0,
-      image: data.image ?? '',
-    }
-
-    posts.unshift(newPost)
-
-    return response.redirect().toPath('/dashboard?')
+    // Récupérer tous les posts et les précharger avec les informations de l'utilisateur
+    const postes = await Poste.query().preload('user', (query) => {
+      query.select('id','firstname', 'lastname', 'avatar')
+    }).preload('medias').orderBy('created_at', 'desc')
+    console.log(JSON.stringify(postes, null, 2));
+    // Passer les posts et les données de l'utilisateur à la vue
+    return ctx.view.render('pages/dashboard', {postes})
   }
 
-  public async savePostDB({ request, response }: HttpContext) {
-    const data = request.all() as Partial<Post>
+  // Autres méthodes pour gérer l'ajout de posts et la création de tweets...
 
-    if (!data.id_user || !data.content) {
-      return response.status(400).json({ error: 'Données manquantes' })
-    }
-
-    console.log('Données envoyées :', data)
-
-    const newPost: Post = {
-      id_user: data.id_user,
-      id_post: data.id_post ?? posts.length + 1,
-      content: data.content,
-      comment: 0,
-      partage: 0,
-      likes: 0,
-      image: data.image ?? '',
-    }
-
-    posts.unshift(newPost)
-
-    return response.redirect().toPath('/dashboard?')
-  }
-
-  public async savelike({ request, response }: HttpContext) {
-    const id = request.param('id')
-    
-    const {increment} = request.body()
+  public async saveOnDatabase(ctx: HttpContext) {
+    const data = ctx.request.all()
 
     try {
-        const post = posts.find((post: Post) => post.id_post === Number(id))
-        if (!post) {
-        return response.status(404).json({ error: 'Post non trouvé' })
-        }
+      // Étape 1 : Création du tweet
+      const tweet = await Poste.create(data)
 
-        if (increment) {
-            post.likes += 1
-        } else {
-            post.likes -= 1
-        }
-
-        // await post.save()
-        return response.status(200).json({ message: 'Like mis à jour' })
-
-    } catch (error) {
-        return response.status(500).json({ error: 'Erreur interne du serveur' })
-    }
-  }
-
-  public async saveOnDatabase({ request, response }: HttpContext) {
-    try {
-      // Récupérer les données validées
-      const data = request.only(['id_user', 'content', 'image'])
-      const validateData = await addpost.validate(data)
-
-      // Vérifier que les champs obligatoires sont présents
-      if (!validateData.id_user || !validateData.content.trim()) {
-        return response.badRequest({ error: 'Données manquantes' })
-      }
-
-      // Création du post en base de données
-      const newPost = await Poste.create(validateData)
-
-      return response.created({
-        message: 'Post créé avec succès',
-        post: newPost,
+      // Étape 2 : Récupération des fichiers médias
+      const files = ctx.request.files('media', {
+        extnames: ['jpg', 'png', 'jpeg'],
+        size: '100mb',
       })
+
+      // Étape 3 : Envoi et enregistrement des médias
+      for (const file of files) {
+        if (!file.tmpPath) continue
+        const result = await CloudinaryService.upload(file.tmpPath)
+
+        const type = result.resource_type === 'video' ? 'video' : 'image'
+
+        await Media.create({
+          poste_id: tweet.id_post,
+          url: result.secure_url,
+          type: type,
+        })
+      }
+      return ctx.response.redirect().toPath('/dashboard')
     } catch (error) {
-      console.error('Erreur lors de la création du post :', error)
-      return response.internalServerError({ error: 'Erreur serveur' })
+      console.error('Erreur de validation:', JSON.stringify(error, null, 2))
+      const errors = error.formatted || error.messages || error
+
+      return ctx.response.internalServerError({
+        message: error.message || "Erreur lors de l'enregistrement du tweet",
+        errors,
+      })
     }
   }
 }
