@@ -27,7 +27,6 @@ export default class AuthController {
       const file = request.file('avatar', {
         extnames: ['jpg', 'png', 'jpeg'],
         size: '10mb',
-        extnames: ['jpg', 'png', 'jpeg'],
       })
   
       let avatarUrl = null
